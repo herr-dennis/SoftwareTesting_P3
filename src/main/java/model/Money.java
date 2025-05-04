@@ -1,7 +1,10 @@
+package model;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Objects;
+
 
 public final class Money implements Comparable<Money> {
 
@@ -32,32 +35,42 @@ public final class Money implements Comparable<Money> {
     }
 
     /**
-      Hier übergeben wir ein Money-Object.
-      4 Euro + 4 Euro = 8 Euro
+     Addiert den Betrag zweier Objekte, gibt den Wert in einem neuen model.Money Objekt zurück
+     ! 4 Euro + 4 Euro = 8 Euro ! -> Kann man darstellen.
+     * @param other ein model.Money Object
+     * @return neues model.Money-Object
      */
     public Money add(Money other) {
         checkCurrencyMatch(other);
         return new Money(this.amount.add(other.amount), this.currency);
     }
 
+    /**
+     *  Subtrahiert den Betrag zweier Objekte, gibt den Wert in einem neuen model.Money Objekt zurück
+     *  ! 4 Euro -2 Euro = 2 Euro -> Kann man darstellen
+     * @param other ein model.Money Object
+     * @return neues model.Money-Object
+     */
     public Money subtract(Money other) {
         checkCurrencyMatch(other);
         return new Money(this.amount.subtract(other.amount), this.currency);
     }
 
     /**
-     * !! Parameter ist kein Money-Object!
-     * Denn 4 euro * 4 Euro = 16 Euro^2, gibt es nicht
-     * @param factor BigDecimal
-     * @return Ergebnis in BigDecimal
+     *  Multipliziert den Betrag eines model.Money-Objekt mit ein Skaklar
+     * @param faktor ein BigDecimal Objekt
+     * @return ein BigDecimal Objekt, kein model.Money Objekt
+     * ! 2 Euro * 2 Euro = 4 Euro^2 -> Gibt es im Finanzkontext nicht.
      */
-    public Money multiply(BigDecimal factor) {
-        return new Money(this.amount.multiply(factor), this.currency);
+    public Money multiply(BigDecimal faktor) {
+        return new Money(this.amount.multiply(faktor), this.currency);
     }
 
-    /**
-     * Kein Objekt als Parameter, denn 6 Euro / 3 Euro = 2 Euro/Euro
-     * @return das Ergebnis der Division
+   /**
+     *  Dividiert den Betrag eines model.Money-Objekt mit ein BigDecimal-Wert
+     * @param divisor ein BigDecimal Objekt
+     * @return ein BigDecimal Objekt, kein model.Money Objekt
+     * ! Kein Objekt als Parameter, denn 6 Euro / 3 Euro = 2 Euro/Euro
      */
     public Money divide(BigDecimal divisor) {
         return new Money(this.amount.divide(divisor, RoundingMode.HALF_UP), this.currency);
@@ -65,8 +78,8 @@ public final class Money implements Comparable<Money> {
 
     /**
      *  Überschriebene Interface Methode
-     * @param other the object to be compared.
-     * @return
+     * @param other vergleichendes Object.
+     * @return 0 -> true, -1 false
      */
 
     @Override

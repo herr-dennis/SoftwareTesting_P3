@@ -1,3 +1,5 @@
+package model;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -9,7 +11,12 @@ public class Main {
         Money b = new Money(BigDecimal.valueOf(141), Currency.getInstance("EUR"));
         Money c =  a.add(b);
 
-       System.out.println(a.toString()+"\n"+c.toString());
+        InsuranceRequest insuranceRequest = new InsuranceRequest( 1, 1,500,false,true);
+        InsuranceCalculator calculator = new InsuranceCalculator();
+        Money money =  calculator.calculatePremium(insuranceRequest);
+
+        System.out.println(money.toString());
+
 
     }
 }
