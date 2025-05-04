@@ -7,7 +7,15 @@ import java.util.Currency;
 
 public class InsuranceCalculator {
 
-    Money calculatePremium(InsuranceRequest insuranceRequest){
+    boolean dollar = false;
+    private static final BigDecimal USD_CONVERSION_RATE = BigDecimal.valueOf(1.13);
+
+    public InsuranceCalculator() {}
+    public InsuranceCalculator(boolean dollar) { // dollar -> true -> Dollar
+           this.dollar = dollar;
+
+    }
+  public   Money calculatePremium(InsuranceRequest insuranceRequest){
 
         int TarifBetrag = Tarifklasse.getGrundbetragFromCode(insuranceRequest.getTarifKlasse());
         int rauschZuschlag = RaucherZuschlag.berechne(insuranceRequest.isRaucher());
@@ -20,6 +28,11 @@ public class InsuranceCalculator {
         result = result.multiply(BigDecimal.valueOf(altersFaktor));
         result = result.multiply(BigDecimal.valueOf(neukundeFaktor));
         result = result.multiply(BigDecimal.valueOf(selbstFaktor));
+
+        if(dollar){
+            result = result.multiply(USD_CONVERSION_RATE);
+            return new Money(result, Currency.getInstance("USD"));
+        }
 
       return new Money(result, Currency.getInstance("EUR"));
     }

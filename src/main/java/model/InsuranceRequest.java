@@ -17,7 +17,7 @@ public class InsuranceRequest {
     public InsuranceRequest(int tarifKlasse, int alter , int selbstBeteilgigung, boolean raucher, boolean neukeunde) {
         this.tarifKlasse = tarifKlasse;
 
-        if(alter > 120 || alter < 0){
+        if(alter > 120 || alter < 1){
             throw new IllegalArgumentException("alter should be between 0 and 120");
         }
         if (!(selbstBeteilgigung == 0 || selbstBeteilgigung == 500 || selbstBeteilgigung == 1000)) {

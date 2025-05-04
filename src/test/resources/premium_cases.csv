@@ -1,0 +1,7 @@
+tarifklasse,alter,selbstbeteiligung,raucher,neukunde,dollar,erwarteter_betrag,währung
+2,45,500,false,true,false,340.20,EUR
+3,35,0,false,true,false,420.00,EUR
+3,35,0,false,true,true,474.60,USD
+2,50,1000,true,true,false,423.36,EUR
+1,40,500,false,false,false,180.00,EUR
+1,40,500,false,false,true,203.40,USD
