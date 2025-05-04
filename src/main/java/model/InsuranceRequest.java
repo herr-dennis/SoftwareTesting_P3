@@ -17,9 +17,11 @@ public class InsuranceRequest {
     public InsuranceRequest(int tarifKlasse, int alter , int selbstBeteilgigung, boolean raucher, boolean neukeunde) {
         this.tarifKlasse = tarifKlasse;
 
+        //Prüfe alter
         if(alter > 120 || alter < 1){
             throw new IllegalArgumentException("alter should be between 0 and 120");
         }
+        //Prüfe die Optionen der Selbstbeteilgigung
         if (!(selbstBeteilgigung == 0 || selbstBeteilgigung == 500 || selbstBeteilgigung == 1000)) {
             throw new IllegalArgumentException("Ungültige Selbstbeteiligung: " + selbstBeteilgigung);
         }

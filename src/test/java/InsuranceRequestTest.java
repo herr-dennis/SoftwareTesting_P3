@@ -15,7 +15,13 @@ public class InsuranceRequestTest {
         });
     }
 
+    @ParameterizedTest
+    @MethodSource("validAge")
+    void shouldThrowNoExceptionForValidAge(int age) {
+            new InsuranceRequest(1, age, 500, false, true);
+    }
 
+    //Randfälle
     static Stream<Integer> invalidAge() {
         return Stream.of(
                 -1,     // zu niedrig
@@ -24,11 +30,16 @@ public class InsuranceRequestTest {
         );
     }
 
+    //Randfälle
     static Stream<Integer> validAge() {
         return Stream.of(
                 1,
-                22,
-                99
+                61,
+                40,
+                1,
+                59,
+                39,
+                119
         );
     }
 }

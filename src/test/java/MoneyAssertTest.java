@@ -2,11 +2,9 @@ import model.Money;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Currency;
-
 import static CustomAssertions.MoneyAssert.*;
 
 public class MoneyAssertTest {
-
 
     @Test
     void shouldEqualCurrency(){
@@ -26,14 +24,12 @@ public class MoneyAssertTest {
         assertThat(money2).hasAmountOf("100.41");
     }
 
-
     @Test
     void testAddition(){
         Money money = new Money(BigDecimal.valueOf(55), Currency.getInstance("EUR"));
         Money money2 = new Money(BigDecimal.valueOf(-41), Currency.getInstance("EUR"));
 
         assertThat(money).add(money2);
-
 
     }
 

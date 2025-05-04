@@ -6,11 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.MethodSource;
 import java.math.BigDecimal;
 import java.util.Currency;
-import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InsuranceCalculatorTest {
@@ -31,6 +28,9 @@ public class InsuranceCalculatorTest {
     }
 
 
+    /*
+     !!! Die Methoden nachher zusammengefasst zu einem ParameterizedTest !!!
+     */
     @Test
     void testCalculatePremiumInEuro() {
         InsuranceCalculator calculator = new InsuranceCalculator(); // default: EUR
@@ -42,7 +42,9 @@ public class InsuranceCalculatorTest {
         // Erwartung: 200 (Tarif) * 0.9 (Selbstbeteiligung) = 180
         assertEquals(0, new BigDecimal("180.00").compareTo(result.getAmount()));
     }
-
+    /*
+       !!! Die Methoden nachher zusammengefasst zu einem ParameterizedTest !!!
+       */
     @Test
     void testCalculatePremiumInDollar() {
         InsuranceCalculator calculator = new InsuranceCalculator(true); // Dollar aktiviert
@@ -54,7 +56,9 @@ public class InsuranceCalculatorTest {
         // Erwartung: 200 * 0.9 * 1.13 = 203.40
         assertEquals(0, new BigDecimal("203.40").compareTo(result.getAmount()));
     }
-
+    /*
+       !!! Die Methoden nachher zusammengefasst zu einem ParameterizedTest !!!
+       */
     @Test
     void testCalculatePremiumWithAllFactors() {
         InsuranceCalculator calculator = new InsuranceCalculator(); // EUR
@@ -65,6 +69,7 @@ public class InsuranceCalculatorTest {
         // 400 + 50 = 450 * 1.4 * 1.05 * 0.9 = 595.35
         assertEquals(0, new BigDecimal("595.35").compareTo(result.getAmount()));
     }
+
 
 
     @ParameterizedTest
@@ -85,22 +90,10 @@ public class InsuranceCalculatorTest {
         Money result = calculator.calculatePremium(request);
 
         assertEquals(Currency.getInstance(waehrung), result.getCurrency());
+        //Vergleicht das result und die Rechnung der BigDecimal-Objekten
         assertEquals(0, BigDecimal.valueOf(erwarteterBetrag)
                 .compareTo(result.getAmount().stripTrailingZeros()));
 
     }
-
-
-
-    static Stream<Integer> invalidAge() {
-        return Stream.of(
-                -999,
-                -1,     // zu niedrig
-                0,      // untere Grenze, evtl. ungültig
-                1200    // deutlich zu hoch
-        );
-    }
-
-
 
 }
