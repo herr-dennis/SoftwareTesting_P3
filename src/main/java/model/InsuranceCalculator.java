@@ -1,6 +1,5 @@
 package model;
 import Enums.*;
-
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -25,7 +24,7 @@ public class InsuranceCalculator {
      * @param insuranceRequest ein Objekt mit Parametern, des Users, für die Berechnung
      * @return ein Money Objekt mit Währung EUR/ USD anhand der Einstellung über den Konstruktor
      */
-  public   Money calculatePremium(InsuranceRequest insuranceRequest){
+  public Money calculatePremium(InsuranceRequest insuranceRequest){
 
         int TarifBetrag = Tarifklasse.getGrundbetragFromCode(insuranceRequest.getTarifKlasse());
         int rauschZuschlag = RaucherZuschlag.berechne(insuranceRequest.isRaucher());
